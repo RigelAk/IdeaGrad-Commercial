@@ -1,0 +1,1215 @@
+/* core styles (glass + neon blue on gray) */ 
+:root{--bg:#1e1e1e;--glass:rgba(250,251,255,.08);--glass2:rgba(250,251,255,.02);--text:#FAFBFF;--muted:#C7CBD3;--accent:#00D1FF;--radius:24px;--shadow:0 10px 30px rgba(0,0,0,.35)}
+*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 "Onest",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Unbounded",system-ui,Arial,sans-serif;letter-spacing:.2px} h2{font-size:34px;margin:0 0 10px} h3{font-size:20px;margin:0 0 6px}
+.container{width:min(1120px,92vw);margin-inline:auto}
+a{color:var(--text);text-decoration:none} a:hover{color:var(--accent)}
+.muted{color:var(--muted)} .tiny{font-size:12px} .ta-center{text-align:center} .accent{color:var(--accent)}
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;filter:saturate(115%)}
+#geo{position:absolute;inset:0;width:100%;height:100%;opacity:.2}
+.blob{position:absolute;width:880px;height:880px;background:radial-gradient(50% 50% at 50% 50%, rgba(0,209,255,.45) 0%, rgba(0,0,0,0) 60%);filter:blur(30px);border-radius:50%;mix-blend-mode:screen;animation:float 20s infinite linear}
+.blob.b1{left:-10%;top:-20%}.blob.b2{right:-15%;top:10%;animation-delay:-7s}.blob.b3{left:10%;bottom:-10%;animation-delay:-12s}
+@keyframes float{0%{transform:translate(0,0)}25%{transform:translate(60px,120px)}50%{transform:translate(0,200px)}75%{transform:translate(-120px,120px)}100%{transform:translate(0,0)}}
+.site-header{display:flex;align-items:center;gap:24px;padding:20px 0;position:sticky;top:0;background:linear-gradient(to bottom, rgba(30,30,30,.9), rgba(30,30,30,0));backdrop-filter:saturate(120%) blur(6px);z-index:10}
+.logo{font-family:"Unbounded";font-weight:700;letter-spacing:.6px}
+.nav{margin-left:auto;display:flex;gap:20px;align-items:center}
+.burger{display:none;margin-left:auto;background:transparent;border:0;cursor:pointer}
+.burger span{display:block;width:26px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;font-weight:600;letter-spacing:.3px;transition:transform .16s ease, background .2s ease, color .2s ease, box-shadow .2s ease}
+.btn:active{transform:translateY(1px) scale(.98)} .btn--primary{background:var(--accent);color:#00131A;box-shadow:0 10px 30px rgba(0,209,255,.25)} .btn--ghost{background:rgba(255, 255, 255, 0.08)}
+.hero{padding:64px 0 24px}.hero__content{padding:28px 28px 32px}.hero__title{font-size:54px;line-height:1.05;margin:0 0 10px}.hero__subtitle{opacity:.8;margin:0 0 20px}
+.section{padding:72px 0}.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:24px}.grid-three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.glass{border-radius:var(--radius);background:linear-gradient(0.56turn,var(--glass) 0%, var(--glass2) 100%);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);box-shadow:var(--shadow);border:none;padding:24px}
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.service .service__emoji{font-size:28px}.service p{opacity:.9}
+.form{display:grid;gap:14px} .form input,.form textarea{width:100%;padding:12px 14px;border-radius:12px;border:0;background:rgba(255,255,255,.06);color:var(--text)} .form input:focus,.form textarea:focus{outline:2px solid var(--accent)}
+.site-footer{padding:36px 0 56px;opacity:.7}
+.fade-in-up,.fade-in-left,.fade-in-right{opacity:0;transform:translate3d(0,10px,0);transition:opacity 1s cubic-bezier(.19,1,.22,1), transform 1s cubic-bezier(.19,1,.22,1)}
+.fade-in-left{transform:translate3d(-40px,0,0)} .fade-in-right{transform:translate3d(40px,0,0)} .inview{opacity:1;transform:none}
+
+/* portfolio */
+.portfolio{position:relative;height:440px;display:flex;align-items:center;justify-content:center;transition:height .45s ease}
+.portfolio.glassless{background:transparent!important;box-shadow:none!important}
+.portfolio .card{position:absolute;width:280px;height:280px;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);will-change:transform;backface-visibility:hidden;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.22,1,.36,1), box-shadow .25s}
+.portfolio .card img{width:100%;height:100%;object-fit:cover;display:block}
+/* closed transforms only — 9 карточек: 4 слева, 1 центр, 4 справа */
+#fan[data-state="closed"] .card:nth-child(2){  transform: translate3d(-170px,40px,0) rotate(-48deg) scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(3){  transform: translate3d(-130px,32px,0) rotate(-36deg) scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(4){  transform: translate3d( -90px,22px,0) rotate(-24deg) scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(5){  transform: translate3d( -50px,12px,0) rotate(-12deg) scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(6){  transform: translate3d(   0px, 0px,0) rotate(   0deg) scale(1.18) } /* центр */
+#fan[data-state="closed"] .card:nth-child(7){  transform: translate3d(  50px,12px,0) rotate( 12deg)  scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(8){  transform: translate3d(  90px,22px,0) rotate( 24deg)  scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(9){  transform: translate3d( 130px,32px,0) rotate( 36deg)  scale(1.18) }
+#fan[data-state="closed"] .card:nth-child(10){ transform: translate3d( 170px,40px,0) rotate( 48deg)  scale(1.18) }
+
+
+
+.portfolio__caption{position:absolute;bottom:14px;left:14px;right:14px;font-size:14px;color:#E7F8FF}
+.portfolio__close{display:none;position:fixed;top: 72px;right:16px;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.3);backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);cursor:pointer;color:#E7F8FF;border-radius:999px;z-index:25;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s ease,opacity .2s ease,box-shadow .2s ease}
+.portfolio__close::before,.portfolio__close::after{transform:rotate(-45deg)}
+.portfolio__close::before{transform:rotate(45deg)} .portfolio__close::after{transform:rotate(-45deg)}
+.portfolio.open .portfolio__close{display:block}
+/* responsive */
+
+
+
+/* services block placement like screenshot */
+.services-box{display:block;padding:24px;border-radius:20px}
+.services-box .section__title{margin: 0 0 10px;text-align:left}
+.grid-six{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+@media (max-width:1024px){.grid-six{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid-six{grid-template-columns:1fr}}
+
+
+
+/* overlay label inside each portfolio card */
+.portfolio .card::after{
+  content: attr(data-title);
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(0,0,0,.55);
+  color:#fff;
+  font-size:14px;
+  line-height:1.1;
+  max-width: 88%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events:none;
+  backdrop-filter: blur(6px) saturate(120%);
+  opacity:0;
+  transition: opacity .25s ease;
+}
+
+/* show labels only when open */
+.portfolio.open .card::after{ opacity:1; }
+
+/* make folded fan bigger (affects both desktop and mobile) */
+.portfolio .card{ width:320px; height:320px; }
+
+
+
+/* static noise overlay: above page background, under all content (inside .bg) */
+.bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url('assets/noise.png');
+  background-size:300px 300px;
+  background-repeat:repeat;
+  opacity:.06; /* subtle */
+  pointer-events:none;
+}
+
+
+
+/* --- v9: Back-to-top button --- */
+.to-top {
+  position: fixed;
+  left: 20px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform .2s ease, opacity .2s ease;
+  opacity: 0.9;
+}
+.to-top:hover { transform: translateY(-2px); }
+/* --- v9: Contacts section layout --- */
+#contacts .contacts-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+#contacts .form-card { max-width: 1100px; margin: 0 auto; } /* wider form */
+#contacts .contacts-plain {
+  background: transparent !important;
+  padding: 0;
+  box-shadow: none;
+}
+#contacts .contacts-plain .contacts { margin-top: 12px; }
+@media (min-width: 1024px){
+  #contacts .form-card { max-width: 1200px; }
+}
+
+/* v9.1 – wider lead form */
+#contacts .form-card{ max-width: 1280px; }
+#contacts .form-card .form{ max-width: 920px; margin-left: auto; margin-right: auto; }
+@media (min-width: 1280px){
+  #contacts .form-card{ max-width: 1400px; }
+  #contacts .form-card .form{ max-width: 1024px; }
+}
+
+
+/* v9.2 – contacts centered + fixed header */
+#contacts .contacts-plain { 
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+#contacts .contacts-plain .contacts { 
+  list-style: none;
+  padding: 0;
+}
+#contacts .contacts-plain .contacts li { 
+  margin: 8px 0;
+}
+
+/* keep top bar always visible */
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+}
+.header-spacer{ height: 72px; } /* push content to avoid overlap */
+@media (max-width: 640px){
+  .header-spacer{ height: 64px; }
+}
+
+
+/* === WHY US (numbered cards) === */
+#why .why{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+#why .why__item{position:relative;min-height:220px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:28px 24px 24px}
+#why .why__icon{width:48px;height:48px;object-fit:contain;margin:8px 0 12px;opacity:.9;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
+#why .why__num{position:absolute;top:-14px;left:-14px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#ffffff;font-weight:800;box-shadow:0 10px 30px rgba(0,209,255,.35)}
+#why h3{margin-top:4px}
+#why p{margin:6px 0 0;color:var(--muted)}
+@media (max-width:1024px){#why .why{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){#why .why{grid-template-columns:1fr} #why .why__item{min-height:auto}}
+
+
+/* === WHY US update: square cards with larger icons === */
+#why .why__item{aspect-ratio:1/1;align-items:center;justify-content:center;text-align:center}
+#why .why__icon{width:150px;height:150px;margin:12px auto 20px;opacity:1}
+#why .why__num{top:-18px;left:-18px;width:50px;height:50px;font-size:18px}
+#why h3{margin-top:8px;font-size:20px}
+#why p{font-size:15px;max-width:90%;margin-inline:auto}
+
+.btn--success{background:linear-gradient(180deg,#00d1ff,#00a8cc)!important;color:#0b1220!important}
+
+/* === Animated Submit Button (Uiverse style, tuned to site accent) === */
+.animated-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  font-size: 16px;
+  background-color: #00ff66a6;
+  border-radius: 100px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px #007730a6; /* #ffffff29 */
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-button span:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--accent, #00D1FF);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-button span:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 5px rgba(0, 209, 255, 0.38);
+  color: #ffffff;
+}
+
+.animated-button:active {
+  transform: scale(0.95);
+}
+
+.animated-button:hover span:last-child {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+
+
+
+/* Mobile: when fan is open, pin layout to top and expand from top */
+@media (max-width: 680px){
+  .portfolio.open{ align-items: flex-start; }
+  .portfolio.open .card{ transform-origin: top center; }
+}
+
+/* === Mobile adaptations (<= 680px) === */
+@media (max-width: 680px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+  .hero { padding: 40px 0 12px; }
+  .hero__content { padding: 16px; }
+  .hero__title { font-size: clamp(24px, 7.2vw, 32px); line-height: 1.15; }
+  .hero__subtitle { font-size: 14px; margin-bottom: 16px; }
+  .hero__cta { display: flex; justify-content: flex-start; }
+  .animated-button { padding: 12px 20px; }
+  .site-header .nav { display: none; } /* burger menu handles mobile nav */
+  .burger { display: inline-flex; }
+  .section { padding: 48px 0; }
+  .grid-two, .grid-three, .services { grid-template-columns: 1fr !important; }
+  .portfolio { height: 360px; }
+  .portfolio .card { width: 220px; height: 220px; }
+  .to-top { right: 12px; bottom: 12px; }
+  .form { gap: 12px; }
+  .form input, .form textarea { font-size: 16px; }
+  /* Background blobs smaller on phones */
+  .blob { filter: blur(60px); }
+  .blob.b1, .blob.b2, .blob.b3 { width: 36vw; height: 36vw; }
+}
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+
+/* === Mobile header fix: remove right shift on small screens === */
+@media (max-width: 680px){
+  /* Make the fixed header span the full viewport width (not the .container width) */
+  .site-header.container{
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    left: 0; right: 0;
+  }
+  /* Keep inner spacing consistent with the mobile container padding */
+  .site-header{ padding-left: 16px; padding-right: 16px; }
+
+  /* Ensure opened mobile nav fills the header width and aligns to the left edge */
+  .site-header .nav{
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+
+/* === Mobile nav dropdown below header === */
+@media (max-width: 680px){
+  .site-header .nav{
+    position: absolute;
+    top: 100%; /* place it right below the header */
+    left: 0;
+    width: 100%;
+    background: #000; /* fallback background for dropdown */
+    z-index: 999;
+  }
+  .site-header{
+    position: relative;
+  }
+}
+
+
+/* === Mobile dropdown restyle + animations (do not affect desktop) === */
+@media (max-width: 680px){
+  /* Prepare header for layered dropdown */
+  .site-header{ position: sticky; top: 0; }
+  .site-header{ padding-left: 16px; padding-right: 16px; }
+  .site-header.container{ width:100vw !important; max-width:100vw !important; margin:0 !important; left:0; right:0; }
+
+  /* Burger animation */
+  .burger{ display:inline-flex; width:38px; height:36px; align-items:center; justify-content:center; }
+  .burger span{ transition: transform .28s ease, opacity .2s ease, top .28s ease; position: relative; }
+  .burger span:nth-child(1){ top:0; }
+  .burger span:nth-child(2){ top:0; }
+  .burger span:nth-child(3){ top:0; }
+  .burger.is-open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .burger.is-open span:nth-child(2){ opacity:0; }
+  .burger.is-open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  /* Dropdown below header and full width */
+  .site-header{ position: relative; z-index: 20; }
+  .site-header .nav{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: none; /* hidden by default; JS toggles .is-open on header */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 0 0 16px 16px;
+    /* Theme-matching "glass" look */
+    background: linear-gradient(180deg, rgba(17,18,20,0.96) 0%, rgba(17,18,20,0.90) 100%);
+    backdrop-filter: saturate(120%) blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    transform: translateY(-8px);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: transform .3s ease, opacity .3s ease, max-height .35s ease;
+  }
+  /* Open state */
+  .site-header.is-open .nav{
+    display: flex !important;
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 60vh; /* slide down */
+  }
+  /* Links feel larger on touch */
+  .site-header .nav a{ padding: 8px 4px; font-size: 16px; }
+}
+
+
+/* === Mobile: fixed header + new SVG hamburger === */
+@media (max-width: 680px){
+  .site-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 30; }
+  .site-header.container{ width:100vw !important; max-width:100vw !important; margin:0 !important; }
+  .header-spacer { height: 72px; }
+
+  .burger { display: none !important; }
+  .hamburger { display: inline-block; margin-left: auto; }
+
+  /* Uiverse hamburger (tuned for dark theme) */
+  .hamburger {
+    height: 50px; width: 50px; transform: 0.2s; position: relative;
+  }
+  .hamburger .checkbox {
+    position: absolute; opacity: 0; height: 100%; width: 100%; cursor: pointer; z-index:2;
+  }
+  .hamburger svg { display:block; }
+  .line { transition: 0.5s; stroke-width: 6px; stroke: #fff; }
+  .lineTop { stroke-dasharray: 40 40; stroke-dashoffset: 25; }
+  .lineBottom { stroke-dasharray: 40 40; stroke-dashoffset: 60; }
+  .lineMid { stroke-dasharray: 40 40; }
+  .hamburger .checkbox:checked + svg .line { stroke: #FF2D55; }
+  .hamburger .checkbox:checked + svg .lineTop {
+    stroke-dashoffset: 0; transform-origin: left; transform: rotateZ(45deg) translate(-7px, -5px);
+  }
+  .hamburger .checkbox:checked + svg .lineMid { stroke-dashoffset: 40; }
+  .hamburger .checkbox:checked + svg .lineBottom {
+    stroke-dashoffset: 0; transform-origin: left; transform: rotateZ(-45deg) translate(-5px, 5px);
+  }
+
+  /* Ensure dropdown attaches below header */
+  .site-header .nav { top: 100%; }
+}
+
+
+/* Скрыть мобильный бургер на десктопе */
+@media (min-width: 681px) {
+  .hamburger {
+    display: none !important;
+  }
+}
+
+.portfolio__close:hover{ transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+.portfolio__close:active{ transform: translateY(0); }
+
+@supports (padding: max(0px)) {
+  .portfolio.open .portfolio__close{
+    top: calc(env(safe-area-inset-top) + 72px);
+    right: max(16px, env(safe-area-inset-right));
+  }
+}
+
+
+@media (max-width: 680px){
+  .site-header{
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    z-index: 1000 !important;
+  }
+}
+
+
+
+/* Remove horizontal scroll globally */
+html, body { overflow-x: hidden; }
+
+/* === Mobile "Почему мы" — horizontal scroll (v3) === */
+@media (max-width: 680px){
+  #why .why{
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: 100vw; /* full screen width */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 48px 0 32px calc(50vw - 140px); /* center first card (280px/2) */
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    background: inherit;
+  }
+  #why .why::-webkit-scrollbar{ display: none; }
+  #why .why__item{
+    flex: 0 0 auto;
+    width: 280px;
+    margin-top: 20px;
+    scroll-snap-align: center;
+  }
+}
+
+/* === Scroll hint styles === */
+@keyframes hint-wiggle-x {
+  0%   { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(calc(-50% + 10px)) translateY(0); }
+}
+
+@media (max-width: 680px){
+  /* Ensure #why is positioning context */
+  #why{ position: relative; }
+
+  /* Place the hint centered over the first card */
+  #why .scroll-hint{
+    position: absolute;
+    top: 8px;
+    left: 50vw;                 /* center of the first card (which is centered) */
+    transform: translateX(-50%);
+    z-index: 10;
+    background: #7a001f;        /* бордовый */
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    pointer-events: none;        /* doesn't block swipes */
+    animation: hint-wiggle-x 0.9s ease-in-out infinite alternate;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  }
+
+  #why .scroll-hint.scroll-hint--hidden{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+/* === Mobile: place "Листай!" right on the first card's top-right edge === */
+@media (max-width: 680px){
+  #why .why__item{ position: relative; } /* ensure positioning context */
+  #why .why__item .scroll-hint{
+    position: absolute;
+    top: -8px;         /* slightly overlaps the card edge */
+    right: -8px;       /* sits right on the corner */
+    left: auto;        /* override previous centering */
+    transform: none;   /* no horizontal centering transform */
+  }
+}
+
+
+
+
+/* === SERVICES (rework to match 'Почему мы') === */
+#services .services-box{ position: relative; }
+#services .services-pager{
+  display: block;
+}
+#services .services-sheet{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+#services .service-card{
+  padding: 16px;
+  border-radius: var(--radius);
+  min-height: 120px;
+}
+#services .service-card h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+#services .service-card p{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Mobile: horizontal snap scroll, 2x2 per page */
+@media (max-width: 680px){
+  #services .services-pager{
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 8px 0 12px 0;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+  #services .services-pager::-webkit-scrollbar{ display: none; }
+  #services .services-sheet{
+    flex: 0 0 calc(100vw - 32px); /* full page minus padding */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 12px;
+    padding-right: 16px;
+    scroll-snap-align: start;
+  }
+  #services .service-card{
+    min-height: 100px;
+    padding: 14px;
+  }
+  /* "Листай!" hint positioning: attach to top-right card of first page */
+  #services .services-sheet:first-child .service-card:nth-child(2){
+    position: relative;
+  }
+  #services .scroll-hint{
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    background: #7a001f;
+    color: #fff;
+    border-radius: 9999px;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    pointer-events: none;
+    animation: hint-wiggle-x 0.9s ease-in-out infinite alternate;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  }
+  #services .scroll-hint.scroll-hint--hidden{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+  }
+}
+
+/* Desktop: show all 8 cards (2x2 + 2x2) with no scroll animation */
+@media (min-width: 681px){
+  #services .services-pager{
+    overflow: visible;
+  }
+}
+
+
+/* === SERVICES: titles, numbering badges, icons === */
+
+
+
+#services .service-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#services .services__num{
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #0b1220;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(0,209,255,.35);
+  z-index: 1;
+}
+
+#services .service__icon{
+  font-size: 28px;
+  opacity: .95;
+  margin-top: 8px;
+}
+
+/* Mobile centering & animated hint to mirror 'Почему мы' */
+@media (max-width: 680px){
+  #services .services-pager{
+    scroll-snap-type: x mandatory;
+    scroll-padding: 50vw;
+  }
+  #services .services-sheet{
+    flex: 0 0 88vw;          /* slightly narrower than viewport */
+    margin: 0 6vw;           /* so the first and last center nicely */
+    scroll-snap-align: center;
+  }
+  /* ensure 2x2 grid inside */
+  #services .services-sheet{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Animated hint styling already defined; ensure z-index above cards */
+  #services .scroll-hint{ z-index: 5; }
+}
+
+
+@media (max-width: 680px){
+  #services .service-card{
+    aspect-ratio: 1 / 1;
+    /* ensure content fits within; allow internal scroll if super tall */
+    overflow: hidden;
+  }
+}
+
+
+
+#services .service-card h3,
+#why h3{
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+
+
+
+/* === TWEAKS 2025-10-11 === */
+
+/* 1) Меньше отступ от заголовков */
+.section__title{ margin: 0 0 10px !important; }
+
+
+/* 2) Мобайл: квадратные карточки; бейдж-номер и "Листай!" поверх карточки */
+@media (max-width: 680px){
+  #services .service-card{
+    aspect-ratio: 1 / 1;
+    min-height: 0;             /* не фиксируем высоту, квадрат обеспечит ratio */
+    position: relative;        /* для абсолютных элементов поверх */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  /* Нумерация поверх внутри карточки */
+  #services .service-card .services__num{
+    top: 8px !important;
+    left: 8px !important;
+    z-index: 3;
+  }
+  /* Иконка и тексты не прилипают к бейджу */
+  #services .service-card .service__icon{ margin-top: 36px; }
+
+  /* "Листай!" поверх квадратной карточки (1-й лист, правая верхняя) */
+  #services .services-sheet:first-child .service-card:nth-child(2){
+    position: relative;
+  }
+  #services .scroll-hint{
+    top: 8px !important;
+    right: 8px !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 4;
+  }
+}
+
+/* 3) Перенос длинных слов в названиях и описаниях карточек */
+#services .service-card h3,
+#services .service-card p{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (b): Services spacing + pager dots === */
+/* Tighter space between section title and cards (like "Почему мы") */
+#services .section__title{ margin: 0 0 8px !important; }
+
+
+/* Mobile: bring the sheets closer to the title */
+@media (max-width: 680px){
+  #services .services-pager{
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 8px 0 12px 0;       /* remove left padding bias */
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0;           /* don't shift snap center */
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+}
+
+/* iOS-like pager dots under services pager (mobile only) */
+#services .pager-dots{
+  display: none;
+}
+@media (max-width: 680px){
+  #services .pager-dots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0 0; /* small gap under the pager */
+  }
+  #services .pager-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.6);
+    opacity: 0.35;
+    transform: scale(1);
+    transition: transform .2s ease, opacity .2s ease, background .2s ease;
+  }
+  #services .pager-dot.is-active{
+    opacity: 1;
+    transform: scale(1.15);
+    background: #fff;
+  }
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): Remove gap under subtitle + white numbers === */
+
+/* Убираем лишний отступ между подзаголовком и карточками */
+
+@media (max-width: 680px){
+  #services .services-pager{
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 8px 0 12px 0;       /* remove left padding bias */
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0;           /* don't shift snap center */
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+}
+
+/* Белая нумерация на всех устройствах */
+#services .services__num{
+  background: #fff !important;
+  color: #0b1220 !important;
+  box-shadow: 0 6px 18px rgba(255,255,255,0.25) !important;
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): Fix spacing and numbering color === */
+
+/* 1) Remove large space between subtitle and cards */
+#services .services-box{
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#services .services-pager{
+  margin-top: 4px !important;
+}
+
+/* 2) Number badge same color as background with white text */
+#services .services__num{
+  background: #1e1e1e !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: none !important;
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): Services spacing, number badge, comment bubble === */
+
+/* 1) Убираем лишний зазор между подзаголовком и первой строкой карточек */
+#services .services-sheet{
+  row-gap: 6px;              /* меньше только по вертикали */
+}
+/* сохранить горизонтальные интервалы как были */
+#services .services-sheet{ column-gap: 16px; }
+@media (max-width: 680px){
+  #services .services-sheet{
+    flex: 0 0 88vw;
+    margin: 0 6vw;               /* centers each sheet visually */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;        /* keep title row compact */
+    gap: 12px;
+    scroll-snap-align: center;   /* always center, even when returning */
+    padding-right: 0;            /* no bias on the right */
+  }
+}
+
+/* 2) Бейдж нумерации: фон = цвет фона, цифры = белые */
+#services .services__num{
+  background: var(--bg) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* 3) Скрываем описания в карточках (текст оставляем в DOM для всплывашки) */
+#services .service-card p{ display: none !important; }
+
+/* Комментарий-всплывашка внутри карточки НЕ РАБОТАЕТ */
+#services .service-comment{
+  position: absolute;
+  left: 10px; right: 10px; bottom: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #EAF7FF;
+  background: rgba(0, 0, 0, 0.733);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none; /* клики проходят сквозь */
+  z-index: 6;
+}
+#services .service-comment.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Чтобы текст на карточке не уезжал вверх из-за бейджа */
+@media (max-width: 680px){
+  #services .service-card .service__icon{ margin-top: 40px; }
+  #services .service-card h3{ margin-top: 6px; }
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): spacing fix, badge colors, overlay comment === */
+
+/* 1) Минимизируем зазор между подзаголовком и сеткой */
+@media (max-width: 680px){
+  #services .services-pager{ padding-top: 0 !important; }
+  
+  #services .services-sheet{ row-gap: 10px !important; } /* tighter only between rows (title->row1) */
+}
+
+/* 2) Бейдж нумерации: фон = фон сайта, цифры = белые */
+#services .services__num{
+  background: var(--bg) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 3) Карточки: прячем описание, усиливаем заголовок, выравниваем с эмодзи */
+#services .service-card p{ display: none !important; }
+#services .service-card h3{
+  font-size: 18px;
+  line-height: 1.15;
+  margin: 6px 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+@media (max-width: 680px){
+  #services .service-card h3{ font-size: 20px; }
+  #services .service-card .service__icon{ margin-top: 30px; font-size: 30px; }
+}
+
+/* Overlay-комментарий на всю карточку НЕ РАБОТАЕТ */
+#services .service-card{
+  position: relative;
+  overflow: hidden;
+}
+#services .service-card .card-comment{
+  position: absolute;
+  inset: 0;
+  padding: 14px;
+  border-radius: inherit;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+  background: rgba(0,0,0,0.38);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+#services .service-card.show-comment .card-comment{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Текст в оверлее немного уже, чтобы не упираться в края */
+#services .service-card .card-comment .comment-inner{
+  max-width: 92%;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): services badge color, emoji center, overlay, hide desc === */
+
+/* 2) Нумерация: фон = цвет фона сайта, цифры = белые */
+#services .services__num{
+  background: var(--bg) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* 3) На карточках только крупный заголовок и эмодзи по центру; описание скрыто */
+#services .service-card{
+  position: relative;
+  overflow: hidden;
+}
+#services .service-card p{
+  display: none !important;
+}
+#services .service-card h3{
+  font-size: 20px;
+  line-height: 1.2;
+  margin-top: 8px;
+  text-wrap: balance;
+}
+#services .service-card .service__icon{
+  font-size: 56px;
+  margin: 0 auto;          /* центрируем */
+  margin-top: 28px;
+  display: block;
+  text-align: center;
+}
+
+/* Overlay комментарий по тапу НЕ РАБОТАЕТ */
+#services .service-card .card-overlay{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+#services .service-card .card-overlay .overlay-text{
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: .95;
+}
+#services .service-card.is-overlay-visible .card-overlay{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile squares already set previously; keep numbering above */
+@media (max-width: 680px){
+  #services .service-card .services__num{ top: 8px; left: 8px; }
+}
+
+
+
+
+/* === TWEAK 2025-10-11 (c): Services numbering color + card overlay === */
+/* 2) Нумерация: фон как у бэкграунда, цифры белые */
+#services .services__num{
+  background: var(--bg) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 3) Карточка: центрируем эмодзи и крупный заголовок, описание скрыто */
+#services .service-card{
+  align-items: center;
+  text-align: center;
+}
+#services .service-card .service__icon{
+  margin-top: 36px;
+  font-size: 28px; /* не увеличиваем */
+  line-height: 1;
+}
+#services .service-card h3{
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+/* Overlay с блюром для показа описания по нажатию НЕ РАБОТАЕТ */
+#services .service-card{
+  position: relative;
+  overflow: hidden;
+}
+#services .service-card .card-overlay{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+  z-index: 4;
+  border-radius: inherit;
+}
+#services .service-card .card-overlay.is-visible{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Чтобы бейдж нумерации был выше блюра */
+#services .service-card .services__num{
+  position: absolute;
+  z-index: 5;
+}
+
+/* Обтекание длинных описаний в оверлее */
+#services .service-card .card-overlay .overlay-text{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  font-size: 14px;
+}
+
+
+/* === FIX 2025-10-11 — services-sheet__title: убран странный огромный отступ, без !important === */
+#services .services-sheet__title { margin: 0 0 6px; font-size: 18px; font-weight: 600; opacity: .9; grid-column: 1 / -1; display: block; }
+
+
+/* === FIX mobile gap under "Форматы видеопродуктов": title row shouldn't be as tall as cards === */
+@media (max-width: 680px){
+  #services .services-sheet{
+    flex: 0 0 88vw;
+    margin: 0 6vw;               /* centers each sheet visually */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;        /* keep title row compact */
+    gap: 12px;
+    scroll-snap-align: center;   /* always center, even when returning */
+    padding-right: 0;            /* no bias on the right */
+  }
+}
+
+#services .services-sheet{ scroll-snap-stop: always; }
+
+
+#services .service-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+#services .service-card:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+#services .service-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  opacity: 0;
+  transform: scale(1.25);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 5;
+}
+#services .service-card.active .service-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+/* === DESKTOP-ONLY FIXES FOR "Услуги" (CENTERED TEXT VERSION, 2025-10-11) === */
+@media (min-width: 681px){
+  /* 1) Hide "Листай!" in Services on desktop only */
+  #services .scroll-hint,
+  #services-scroll-hint{
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* 2) Ensure numbering badges are fully visible */
+  #services .service-card .services__num{
+    top: 8px !important;
+    left: 8px !important;
+    z-index: 3;
+  }
+
+  /* 3) Remove emojis and center text on cards */
+  #services .service__icon{
+    display: none !important;
+  }
+  #services .service-card{
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>IDEAGRAD — Каждая мысль может стать фильмом</title>
+<meta content="IDEAGRAD — команда креативных специалистов в сфере видеопроизводства: съёмка, монтаж, 2D/3D анимация, VFX, рекламные ролики и контент для соцсетей." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&amp;family=Unbounded:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="bg">
+<canvas id="geo"></canvas>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+</div>
+<header class="site-header container">
+<a class="logo" href="#">IDEAGRAD</a>
+<nav class="nav">
+<a href="#about">О компании</a>
+<a href="#services">Услуги</a>
+<a href="#portfolio">Портфолио</a>
+<a href="#why">Почему мы</a>
+<a class="btn btn--ghost" href="#contacts">Обсудить проект </a>
+</nav>
+<div aria-label="Открыть меню" class="hamburger">
+<input aria-expanded="false" class="checkbox" type="checkbox"/>
+<svg aria-hidden="true" fill="none" height="50" viewbox="0 0 50 50" width="50">
+<path class="lineTop line" d="M6 11L44 11" stroke="white" stroke-linecap="round" stroke-width="4"></path>
+<path class="lineMid line" d="M6 24H43" stroke="white" stroke-linecap="round" stroke-width="4"></path>
+<path class="lineBottom line" d="M6 37H43" stroke="white" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</header>
+<div class="header-spacer"></div>
+<section class="hero container">
+<div class="hero__content glass fade-in-up">
+<h1 class="hero__title">
+<span class="accent">IDEAGRAD</span><br/>
+        Каждая мысль может стать фильмом
+      </h1>
+<p class="hero__subtitle">Эстетика × Технологии × Идеи</p>
+<div class="hero__cta">
+<a class="animated-button" href="#contacts"><span>Обсудить проект</span><span></span></a>
+</div>
+</div>
+</section>
+<section class="section container" id="about">
+<div class="grid-two">
+<div class="glass fade-in-left">
+<h2 class="section__title">О компании</h2>
+<p>IDEAGRAD — команда креативных специалистов в сфере видеопроизводства. Мы совмещаем эстетику, технологии и идеи, чтобы ваши проекты звучали ярко и современно.</p>
+</div>
+<div class="glass fade-in-right">
+<h3 class="section__subtitle">Чем мы занимаемся?</h3>
+<p>Берём на себя полный цикл: от концепта и препродакшна до готового видеоролика. Встраиваемся в KPI бизнеса и говорим с аудиторией визуальным языком сегодняшнего дня.</p>
+</div>
+</div>
+</section>
+<section class="section container" id="services">
+<div class="services-box">
+<div aria-hidden="true" class="scroll-hint" id="services-scroll-hint">Листай! →</div>
+<h2 class="section__title">Услуги</h2>
+<div class="services-pager">
+<!-- Лист 1: полный цикл видеопроизводства -->
+<div class="services-sheet"><h3 class="services-sheet__title">Полный цикл видеопроизводства</h3>
+<div class="service-card glass" data-desc="От концепта до готового кадра"><div class="services__num">1</div><div class="service__icon">🎬</div>
+<h3>Видеосъёмка</h3>
+
+</div>
+<div class="service-card glass" data-desc="Создаём динамику, ритм и эмоции"><div class="services__num">2</div><div class="service__icon">✂️</div>
+<h3>Видеомонтаж</h3>
+
+</div>
+<div class="service-card glass" data-desc="Визуализируем идеи в стильной графике"><div class="services__num">3</div><div class="service__icon">🌀</div>
+<h3>Анимация (2D / 3D)</h3>
+
+</div>
+<div class="service-card glass" data-desc="Добавляем реалистичные эффекты в видеоролик"><div class="services__num">4</div><div class="service__icon">🌌</div>
+<h3>VFX / CGI</h3>
+
+</div>
+</div>
+<!-- Лист 2: форматы видеопродуктов -->
+<div class="services-sheet"><h3 class="services-sheet__title">Форматы<br/>видеопродуктов</h3>
+<div class="service-card glass" data-desc="Продаём идею, эмоцию и ценность бренда"><div class="services__num">1</div><div class="service__icon">📢</div>
+<h3>Рекламные ролики</h3>
+
+</div>
+<div class="service-card glass" data-desc="Показываем компанию изнутри, её людей и миссию"><div class="services__num">2</div><div class="service__icon">🏢</div>
+<h3>Корпоративные фильмы</h3>
+
+</div>
+<div class="service-card glass" data-desc="Короткий формат с акцентом на вовлечение и стиль"><div class="services__num">3</div><div class="service__icon">📱</div>
+<h3>Ролики для соцсетей</h3>
+
+</div>
+<div class="service-card glass" data-desc="Живое видео с мероприятий, презентаций и событий"><div class="services__num">4</div><div class="service__icon">📸</div>
+<h3>Репортажные ролики</h3>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section container" id="portfolio">
+<div class="section-head">
+<h2 class="section__title">Портфолио</h2>
+<p class="muted">Наведите на стопку для просмотра работ</p>
+</div>
+<div class="portfolio-wrapper">
+<div class="portfolio glassless" id="fan">
+<button aria-label="Закрыть" class="portfolio__close">×</button>
+<a class="card" data-title="Выставочный видеоролик" href="https://disk.yandex.ru/d/aylT5oT4yNqe9A" rel="noopener noreferrer" target="_blank"><img alt="Съёмка выставки" src="assets/p1.jpg"/></a>
+<a class="card" data-title="Динамичный CGI мультфильм" href="https://disk.yandex.ru/i/Fz5cO-qSDSpo3g" rel="noopener noreferrer" target="_blank"><img alt="3D ролик №2" src="assets/p3.jpg"/></a>
+<a class="card" data-title="Реклама складских услуг" href="https://disk.yandex.ru/i/TTMN01ZIz8xGKw" rel="noopener noreferrer" target="_blank"><img alt="Рекламная съёмка" src="assets/p4.jpg"/></a>
+<a class="card" data-title="VFX Падение Метеорита" href="https://disk.yandex.ru/i/UIEhxPDoE2q-iw" rel="noopener noreferrer" target="_blank"><img alt="VFX 3D ролик" src="assets/p5.jpg"/></a>
+<a class="card" data-title="VFX Дирижабль с рекламным баннером" href="https://disk.yandex.ru/i/3er6wWoQtqSG7g" rel="noopener noreferrer" target="_blank"><img alt="VFX 3D ролик" src="assets/p6.jpg"/></a>
+<a class="card" data-title="Презентация Автомобиля" href="https://disk.yandex.ru/i/ibWlTD6r7RExaw" rel="noopener noreferrer" target="_blank"><img alt="VFX 3D ролик" src="assets/p7.jpg"/></a>
+<a class="card" data-title="3D Сборка Чистых Помещений" href="https://disk.yandex.ru/i/D33YFJ3U-bPiYQ" rel="noopener noreferrer" target="_blank"><img alt="VFX 3D ролик" src="assets/p8.jpg"/></a>
+<a class="card" data-title="3D Реклама Дверей" href="https://disk.yandex.ru/i/LpyyO7s-t5AssA" rel="noopener noreferrer" target="_blank"><img alt="VFX 3D ролик" src="assets/p9.jpg"/></a>
+<a class="card" data-title="3D ролик — продуктовая анимация" href="https://disk.yandex.ru/i/vVuR60HtzxBQXw" rel="noopener noreferrer" target="_blank"><img alt="3D ролик №1" src="assets/p2.jpg"/></a>
+<div class="portfolio__caption"></div>
+</div>
+</div>
+</section>
+<section class="section container" id="why">
+<div aria-hidden="true" class="scroll-hint" id="why-scroll-hint">Листай! →</div>
+<h2 class="section__title ta-center">Почему мы</h2>
+<div class="why grid-three"><div class="why__item glass fade-in-up"><div class="why__num">1</div><img alt="Креатив + технологии" class="why__icon" src="assets/why/why1.png"/><h3>Креатив + технологии</h3><p>Сильная концепция и современный продакшн.</p></div><div class="why__item glass fade-in-up"><div class="why__num">2</div><img alt="Под задачи бизнеса" class="why__icon" src="assets/why/why2.png"/><h3>Под задачи бизнеса</h3><p>Понимаем KPI, даём понятные метрики.</p></div><div class="why__item glass fade-in-up"><div class="why__num">3</div><img alt="Партнёрство" class="why__icon" src="assets/why/why3.png"/><h3>Партнёрство</h3><p>Работаем прозрачно и на результат.</p></div></div>
+</section>
+<section class="section container" id="contacts">
+<div class="contacts-wrap">
+<h2 class="section__title ta-center">Остались вопросы?</h2>
+<div class="glass fade-in-right form-card">
+<h3 class="section__subtitle">Оставить заявку</h3>
+<form class="form" id="leadForm">
+<label>Имя<input name="name" placeholder="Как к вам обращаться?" required="" type="text"/></label>
+<label>Почта<input name="email" placeholder="you@example.com" required="" type="email"/></label>
+<label>Сообщение<textarea name="message" placeholder="Кратко о задаче" rows="4"></textarea></label>
+<button class="animated-button" type="submit">
+<span>Отправить</span>
+<span></span>
+</button>
+<p aria-live="polite" class="muted tiny" id="formStatus" role="status"></p>
+</form>
+</div>
+<div class="contacts-plain fade-in-up" id="contactsPlain">
+
+<!-- Пока не нужно -->
+
+</div>
+</div>
+</section>
+<footer class="site-footer container">
+<p>© IDEAGRAD, 2025</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
